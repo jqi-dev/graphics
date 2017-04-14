@@ -89,9 +89,9 @@ function init() {
         var cone = new THREE.Mesh( coneGeometry, cylinderMaterial );
         cone.translateY(48);
         scene.add( cone );
-  
-        // Spheres 
-  
+
+        // Spheres
+
         function add_sphere(pos) {
           var loc = new THREE.Vector3(pos[0], pos[1], pos[2])
           var geometry = new THREE.SphereGeometry(1, 24, 24, 0, Math.PI * 2, 0, Math.PI * 2);
@@ -103,20 +103,20 @@ function init() {
           scene.add(sphere);
           sphere.position.add(loc);
         }
-  
+
         add_sphere([-50, 0, 0])
         add_sphere([0, -50, 0])
         add_sphere([0, 50, 0])
         add_sphere([0, 0, 50])
 
         // Edge circles
-  
+
         var circleLineMaterial = new THREE.MeshLineMaterial({
           color: new THREE.Color(0x3A3A3A),
           lineWidth: 0.15,
           opacity: 1,
         });
-  
+
         function createCircle(radius, points, material, shifted) {
           var g = new THREE.CircleGeometry(radius, points);
           if (shifted) {
@@ -127,24 +127,24 @@ function init() {
           var mesh = new THREE.Mesh( line.geometry, material );
           return mesh
         }
-  
+
         scene.add(createCircle(radius, points, circleLineMaterial, true).rotateX(Math.PI/2));
-  
+
         // Circle mesh
-  
+
         var meshCircleMaterial = new THREE.MeshLineMaterial({
           color: new THREE.Color(0x000000),
           transparent: true,
           lineWidth: 0.1,
           opacity: 0.1,
         });
-  
+
         for (i = 0; i < 4; i++) {
           var circle = createCircle(radius, points, meshCircleMaterial, true)
           circle.rotation.set(0, (2*Math.PI/4) * i, 0)
           scene.add(circle)
         }
-        
+
         for (i = 0; i < 3; i++) {
           var height = (100/4) * (i + 1) - 50
           var new_radius = Math.sqrt(Math.pow(radius, 2) - Math.pow(height, 2))
@@ -155,57 +155,57 @@ function init() {
         }
 
         // Axes
-  
+
         function createLine (start, end, color) {
-          
+
           var material = new THREE.MeshLineMaterial({
             color: new THREE.Color(color),
             lineWidth: 0.4,
             opacity: 1
           });
-          
+
           var startPoint = new THREE.Vector3(start[0], start[1], start[2])
           var endPoint = new THREE.Vector3(end[0], end[1], end[2])
-          
+
           var g = new THREE.Geometry();
           g.vertices.push(startPoint);
           g.vertices.push(endPoint);
-          
+
           var line = new THREE.MeshLine();
           line.setGeometry(g);
-          
+
           var mesh = new THREE.Mesh(line.geometry, material);
           return mesh
-          
+
         }
-        
+
         x_axis = createLine([-radius, 0, 0], [0, 0, 0], 0xf4a82e)
         z_axis = createLine([0, -radius, 0], [0, radius, 0], 0x3A3A3A)
         y_axis = createLine([0, 0, 0], [0, 0, radius], 0x20b51b)
-        
+
         scene.add(x_axis, y_axis, z_axis)
-        
+
         // Backing plane
-        
+
         var plane_material = new THREE.MeshBasicMaterial({
           color: 0xfcfcfc,
           opacity: 1,
         });
-        
+
         plane = new THREE.Mesh( new THREE.CircleGeometry(90, points, Math.PI * 2), plane_material );
         plane.position.set( 0, 0, -55 );
         scene.add( plane );
-    
+
         var outlineMaterial = new THREE.MeshLineMaterial({
           color: new THREE.Color(0x3A3A3A),
           lineWidth: 0.4,
           opacity: 0.4,
         });
-        
+
         var outline = createCircle(87, points, outlineMaterial, true);
         outline.position.set( 0, 0, -50 );
         scene.add( outline );
-  
+
         plane_pivot = new THREE.Group();
         scene.add(plane_pivot)
         plane_pivot.add(plane)
@@ -244,7 +244,7 @@ function init() {
         scene.add(spriteZ);
 
         // Pivot point
-  
+
         empty = new THREE.Group();
         empty.position.add(new THREE.Vector3(0,50,0))
 
@@ -254,9 +254,9 @@ function init() {
         pivot.add( cone );
         pivot.add( empty );
         pivot.rotation.set(Math.PI,0,0)
-  
+
         // Path trail
-        
+
         function square_wave(x, length=1) {
             // for drawing a dashed line
             var freq = 120;
@@ -268,25 +268,25 @@ function init() {
               return 0
             }
         }
-  
+
         var pathMaterial = new THREE.MeshLineMaterial({
           color: new THREE.Color(0xf4a82e),
           lineWidth: 0.4,
         });
-        
+
          staticPath = function(color, dashed=false) {
-          
+
           this.name = "Path"
           this.position = path_position;
           this.trail = new THREE.Geometry();
-           
+
           var path_length = 0;
-           
+
           var material = new THREE.MeshLineMaterial({
           color: new THREE.Color(color),
           lineWidth: 0.4,
           });
-           
+
           var dashes = function(p) {
             if (dashed) {
               return square_wave(p, path_length); }
@@ -294,64 +294,64 @@ function init() {
               return 1;
             }
           }
-          
+
           this.createTrail = function () {
-            
+
             path_length = this.trail.vertices.length
             this.trail.vertices.push(this.position.clone());
             this.trail_line = new THREE.MeshLine();
             this.trail_line.setGeometry(this.trail, dashes);
             this.trail_mesh = new THREE.Mesh(this.trail_line.geometry, material);
-            scene.add(this.trail_mesh) 
-            
+            scene.add(this.trail_mesh)
+
           }
-          
+
           this.createTrail();
-          
+
           this.update = function() {
             this.position = path_position;
             scene.remove(this.trail_mesh);
             this.createTrail();
           }
-    
+
         }
-      
+
 }
 
 function rotate_pivot() {
-  
+
         var rotation_y = y_rotation.rotation - prev_y_rotation;
         var rotation_x = x_rotation.rotation - prev_x_rotation;
-  
+
         // store total rotation of current action
         rotation_counter += Math.abs(rotation_x) + Math.abs(rotation_y);
-  
+
         var quaternion_x = new THREE.Quaternion();
         var quaternion_y = new THREE.Quaternion();
-  
+
         quaternion_x.setFromAxisAngle( new THREE.Vector3( 1, 0, 0 ), -rotation_x );
         quaternion_y.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), rotation_y);
-  
+
         var rotation_quaternion = new THREE.Quaternion();
-        
+
         rotation_quaternion.multiplyQuaternions(quaternion_y, quaternion_x)
 //        rotation_quaternion.multiplyQuaternions(quaternion_z, rotation_quaternion)
-  
+
         curQuaternion = pivot.quaternion;
 		curQuaternion.multiplyQuaternions(rotation_quaternion, curQuaternion);
         curQuaternion.normalize();
         pivot.setRotationFromQuaternion(curQuaternion);
-  
+
         prev_y_rotation = y_rotation.rotation;
         prev_x_rotation = x_rotation.rotation;
-  
+
         scene.updateMatrixWorld();
-  
+
         var empty_position = new THREE.Vector3();
         empty_position.setFromMatrixPosition(empty.matrixWorld);
-        
+
         path_position = empty_position;
-  
+
         // if rotation > 2*PI, don't add to path
         if (rotation_counter < 2 * Math.PI) {
           current_path.update()
@@ -360,7 +360,7 @@ function rotate_pivot() {
 }
 
 function reset_rotation(object) {
-  
+
         object.updateMatrix();
         object.applyMatrix( object.matrix );
         object.rotation.set( 0, 0, 0 );
@@ -368,22 +368,22 @@ function reset_rotation(object) {
 }
 
 function precession() {
-  
+
         if (precess) {
-          
+
           rotation_z = .02;
           rotation_counter += rotation_z;
-          
+
           var quaternion_z = new THREE.Quaternion();
           quaternion_z.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), rotation_z );
           curQuaternion = pivot.quaternion;
           curQuaternion.multiplyQuaternions(quaternion_z, curQuaternion);
           curQuaternion.normalize();
           pivot.setRotationFromQuaternion(curQuaternion);
-          
+
           var empty_position = new THREE.Vector3();
           empty_position.setFromMatrixPosition(empty.matrixWorld);
-          
+
           // if rotation > 2*PI, don't add to path
           if (rotation_counter < 2 * Math.PI) {
             path_position = empty_position;
@@ -411,7 +411,7 @@ function precession_stop() {
 }
 
 function animate() {
-        
+
         var delta = clock.getDelta();
         requestAnimationFrame(animate);
         cameraControls.update(delta);
@@ -439,9 +439,9 @@ function fade_label() {
 }
 
 function axis_rotation(axis, amount) {
-    
+
       if (buttons_enabled) {
-        
+
         buttons_enabled = false;
         precession_stop();
 
@@ -464,11 +464,11 @@ function axis_rotation(axis, amount) {
 
         TweenMax.to(rotation_axis, 2, {
           rotation: "+=" + amount,
-          ease: Power1.easeInOut, 
+          ease: Power1.easeInOut,
           onStart:reset_rotation_counter(),
           onUpdate:rotate_pivot,
           onComplete:set_buttons
-        }); 
+        });
       }
 }
 
@@ -481,21 +481,21 @@ function set_buttons() {
 }
 
 function reset() {
-  
+
       precession_stop();
-  
+
       pivot.rotation.set(Math.PI,0,0)
       TweenMax.killAll();
-  
+
       var array_length = path_array.length;
       for (var i = array_length - 1; i >= 0; i--) {
           var mesh = path_array[i].trail_mesh
           scene.remove(mesh);
           path_position = new THREE.Vector3(0, -50, 0);
       }
-  
+
       TweenMax.set("#bar", {x:0});
-  
+
 }
 
 function test_log(this_thing) {
@@ -504,11 +504,11 @@ function test_log(this_thing) {
 
 function sequence() {
       reset();
-  
+
       var delay = 2.1 + document.getElementById("delay").value * 5.333;
       var x_slider = document.getElementById("delay").value;
       var distance = $("#pulses").width() * .69;
-  
+
       var tl = new TimelineMax();
       tl.addCallback(axis_rotation, 0, [x_axis, Math.PI/2]);
       tl.to("#bar", 2, {x: distance/5, ease:Power1.easeInOut});
@@ -533,12 +533,12 @@ function onWindowResize() {
 
 function move_dot() {
       var x_slider = document.getElementById("delay").value
-      
+
       var x_pos = x_slider * $("#graph").width() * 0.87;
       var y_pos = Math.sin(x_slider * 2 * Math.PI) * $("#graph").height()/3.5;
       TweenMax.set('#dot', {x:x_pos, y:y_pos});
-  
+
       var graph_pos = x_slider * $("#pulses").width() * .69;
-  
+
       TweenMax.set('#green', {x: graph_pos});
 }

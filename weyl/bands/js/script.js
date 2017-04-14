@@ -1,5 +1,5 @@
 window.onload = function() {
-  
+
   var linebound_height = $('.linebounds').height()
   var slider_value = 0;
   var mask_tween = 0.5;
@@ -26,21 +26,21 @@ window.onload = function() {
     semimetal: 0,
     conductor: 1
   }
-  
+
   // Initial state - insulator text and band
-  
+
   TweenMax.set('#band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
 
   // rescale when the window is resized
 
   $( window ).resize(function() {
-    
+
     linebound_height = $('.linebounds').height()
     TweenMax.set('#band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
     TweenMax.set(['#bluepath', '#blue_behind', '#band_label'], {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
     TweenMax.set('#gap_label', {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
     TweenMax.set('#gap_label', {opacity: gap_tween})
-    
+
   });
 
 
@@ -75,7 +75,7 @@ window.onload = function() {
       TweenMax.to(['#bluepath', '#blue_behind', '#band_label'], 1, {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
       TweenMax.to('#gap_label', 1, {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
       TweenMax.to('#gap_label', 1, {opacity: gap_tween})
-      
+
   });
-  
+
 }
