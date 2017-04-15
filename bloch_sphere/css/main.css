@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* Threejs renderer container */
+
+.box {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.box:before{
+  content: "";
+  display: block;
+  padding-top: 100%; 	/* ratio of 4:3*/
+}
+#container {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  margin:0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+#label {
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 35%;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  transition: all 1s ease;
+}
+
+/* Input sliders */
+
+#sliders {
+  width: 80%;
+  max-width: 600px;
+  margin: 0px auto;
+  text-align: center;
+}
+input {
+  width: 70%;
+  display: inline-block;
+  vertical-align:middle;
+}
+#labelContainer {
+  width: 100px;
+  text-align: center;
+  vertical-align:middle;
+  display: inline-block;
+  margin: -10px 0;
+}
+.sliderContainer {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* For box outlines and drop shadow */
+
+.outlined {
+  outline: solid 1px #888888;
+  box-shadow: 4px 4px 2px #999999;
+}
