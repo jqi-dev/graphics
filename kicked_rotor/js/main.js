@@ -1,4 +1,4 @@
-var limiter = $(".graphics-environment").last().parent().attr("id")
+var limiter = $(".graphics-environment").last().parent().attr("id");
 
 var MODULE = (function () {
 
@@ -6,6 +6,10 @@ var MODULE = (function () {
 
   // put everything inside of this function
   m.init = function () {
+
+  console.log("made it to the kicked rotor");
+
+};
 
   return m;
 
