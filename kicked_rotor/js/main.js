@@ -14,3 +14,5 @@ var MODULE = (function () {
   return m;
 
 }());
+
+MODULE.init();

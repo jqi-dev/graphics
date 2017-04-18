@@ -1,6 +1,12 @@
-window.onload = function() {
+var limiter = $(".graphics-environment").last().parent().attr("id");
 
-  var linebound_height = $('.linebounds').height()
+var MODULE = (function() {
+
+  var m ={};
+
+  m.init = function () {
+
+  var linebound_height = $('#' + limiter + ' .linebounds').height()
   var slider_value = 0;
   var mask_tween = 0.5;
   var band_tween = 0;
@@ -29,24 +35,24 @@ window.onload = function() {
 
   // Initial state - insulator text and band
 
-  TweenMax.set('#band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
+  TweenMax.set('#' + limiter + ' #band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
 
   // rescale when the window is resized
 
   $( window ).resize(function() {
 
-    linebound_height = $('.linebounds').height()
-    TweenMax.set('#band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
-    TweenMax.set(['#bluepath', '#blue_behind', '#band_label'], {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
-    TweenMax.set('#gap_label', {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
-    TweenMax.set('#gap_label', {opacity: gap_tween})
+    linebound_height = $('#' + limiter + ' .linebounds').height()
+    TweenMax.set('#' + limiter + ' #band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
+    TweenMax.set(['#' + limiter + ' #bluepath', '#' + limiter + ' #blue_behind', '#' + limiter + ' #band_label'], {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
+    TweenMax.set('#' + limiter + ' #gap_label', {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
+    TweenMax.set('#' + limiter + ' #gap_label', {opacity: gap_tween})
 
   });
 
 
   // Button toggle
 
-  var buttons = $('button').on('click', function (e) {
+  var buttons = $('#' + limiter + ' button').on('click', function (e) {
 
       var $this = $(this),
           el = buttons.not(this),
@@ -56,9 +62,9 @@ window.onload = function() {
       $this.addClass('selected');
       el.addClass('disabled');
 
-      var captions = $('.caption-text');
+      var captions = $('#' + limiter + ' .caption-text');
 
-      $('.caption-text').each(function() {
+      $('#' + limiter + ' .caption-text').each(function() {
         if (this.id == button_id + "-label") {
           $(this).css('opacity', '1');
         }
@@ -71,11 +77,17 @@ window.onload = function() {
       band_tween = band_values[button_id.toString()]
       gap_tween = gap_values[button_id.toString()]
 
-      TweenMax.to('#band_mask', 1, {y: -(mask_tween) * (linebound_height), ease: Power1.easeInOut})
-      TweenMax.to(['#bluepath', '#blue_behind', '#band_label'], 1, {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
-      TweenMax.to('#gap_label', 1, {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
-      TweenMax.to('#gap_label', 1, {opacity: gap_tween})
+      TweenMax.to('#' + limiter + ' #band_mask', 1, {y: -(mask_tween) * (linebound_height), ease: Power1.easeInOut})
+      TweenMax.to(['#' + limiter + ' #bluepath', '#' + limiter + ' #blue_behind', '#' + limiter + ' #band_label'], 1, {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
+      TweenMax.to('#' + limiter + ' #gap_label', 1, {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
+      TweenMax.to('#' + limiter + ' #gap_label', 1, {opacity: gap_tween})
 
   });
 
-}
+  } // m.init() close
+
+  return m;
+
+}()); // MODULE close
+
+MODULE.init()
