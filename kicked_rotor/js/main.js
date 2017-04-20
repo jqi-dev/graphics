@@ -1,18 +1,7 @@
-var limiter = $(".graphics-environment").last().parent().attr("id");
-
-var MODULE = (function () {
-
-  var m = {}
-
-  // put everything inside of this function
-  m.init = function () {
-
-  console.log("made it to the kicked rotor");
-
-};
-
-  return m;
-
-}());
-
-MODULE.init();
+require(['config'], function() {
+  require(['jquery'], function($){
+    // This is a simple graphic, so nothing to really do.
+    // Still, we might want to use jQuery in the future.
+    console.log('made it to kicked rotor');
+  });
+});

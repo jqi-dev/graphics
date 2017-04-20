@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-  <title>Moebius GIF</title>
-  <link type='text/css' rel='stylesheet' href='style.css'/>
+<script src="../require.js" data-main="js/config"></script>
 </head>
 
 <body>
-  <div class="graphics-environment">
+  <div id="graphics-environment">
+  <style type="text/css">
+  body {
+    font-family: sans-serif;
+    font-size:15px;
+    color: #333333;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 640px;
+    position: relative;
+    margin: 0 auto;
+    padding-bottom: 1px;
+    font-style: italic;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .caption-text {
+    max-width: 550px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  </style>
   <div class="container">
     <image src="kicked_rotor_web.gif"></image>
     <div class="caption">
       <p class="caption-text">The changing trajectories of the kicked rotor, shown as the kicking strength increases. The regular patterns of trajectories dissolve as chaos takes over. (Credit: E. Rozenbaum/JQI)</p>
     </div>
   </div>
-  <script src="js/main.js"></script>
+  <script>
+  require(['main']);
+  </script>
   </div>
 </body>
 </html>
