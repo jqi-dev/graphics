@@ -7,79 +7,80 @@
 
 <body>
 <div id="graphics-environment">
+<div id="band-structure">
   <!---------------------->
   <!-- Animated content -->
   <!---------------------->
 <style type="text/css">
 
-.gsap-container {
+#band-structure .gsap-container {
   width: 90%;
   max-width: 600px; /*Not necessary, useful for testing*/
   position: relative;
   margin: 0 auto;
 }
 
-.label {
+#band-structure .label {
   z-index:0;
   margin-left:0%;
 }
 
-.gsap-image {
+#band-structure .gsap-image {
   position: absolute;
   width: 100%;
 }
 
-.gsap-image.relative {
+#band-structure .gsap-image.relative {
   position: relative;
 }
 
-.behind {
+#band-structure .behind {
   z-index: -10;
 }
 
-.gsap-image.behind {
+#band-structure .gsap-image.behind {
   opacity:0.5;
 }
 
-#band_mask {
+#band-structure #band_mask {
   z-index:-9;
 }
 
-.linebounds {
+#band-structure .linebounds {
   height: 95%;
   width: 100%;
   margin-top:0;
   position: absolute;
 }
 
-.button-container {
+#band-structure .button-container {
   text-align:center;
 }
 
-.caption {
+#band-structure .caption {
   width: 100%;
   max-width: 800px;
   position: relative;
   margin: 0 auto;
 }
 
-.caption-text.first {
+#band-structure .caption-text.first {
   opacity: 1;
 }
 
-.caption-text {
+#band-structure .caption-text {
   position: absolute;
   font-size: 15px;
   margin-top: 0px;
   opacity:0;
 }
 
-.caption-text.position {
+#band-structure .caption-text.position {
   position: relative;
   margin-top: 10px;
 }
 
-.caption-paragraph {
+#band-structure .caption-paragraph {
   width: 100%;
   max-width: 550px;
   position: relative;
@@ -87,7 +88,7 @@
 }
 
 /* General button style (reset) */
-.btn {
+#band-structure .btn {
 	border: none;
 	font-family: inherit;
 	font-size: inherit;
@@ -107,7 +108,7 @@
 	transition: all 0.3s;
 }
 
-.btn:after {
+#band-structure .btn:after {
 	content: '';
 	position: absolute;
 	z-index: -1;
@@ -117,19 +118,19 @@
 }
 
 /* Button 1a */
-.btn:hover,
-.btn:active {
+#band-structure .btn:hover,
+#band-structure .btn:active {
 	color: #fff;
 	background: #1e5374;
 }
 
-.selected {
+#band-structure .selected {
   color: #fff;
   background: #1e5374;
   border: 2px solid #1e5374;
 }
 
-.disabled {
+#band-structure .disabled {
   border: 2px solid #1e5374;
   color: #1e5374;
   background: #fff;
@@ -173,7 +174,7 @@
 require(['main']);
 </script>
 </div>
-
+</div>
 
 </body>
 </html>

@@ -3,19 +3,17 @@ require(['config'], function() {
 
     // Limit the scope of selectors so that there is no crosstalk in the Atlas
     // environment.
-    var limiter = $(".graphics-environment").last().parent();
-    var base_scope = $('html');
-    if (limiter) {
-      // Use the following variable to scope down jQuery selectors
-      var base_scope = limiter;
-      console.log('inside bands ' + base_scope.attr('id'));
-    }
+    var limiter = $("#band-structure");
 
-    //var linebound_height = $('.linebounds').height();
-    var linebound_height = base_scope.find('.linebounds').height();
-    //console.log(linebound_height);
-    var div_band_mask = base_scope.find("#band_mask");
-
+    // set jQuery selectors for elements to manipulate
+    var linebounds = limiter.find('.linebounds');
+    var band_mask = limiter.find("#band_mask");
+    var bluepath = limiter.find("#bluepath");
+    var blue_behind = limiter.find("#blue_behind");
+    var band_label = limiter.find("#band_label");
+    var gap_label = limiter.find("#gap_label");
+    var buttons = limiter.find("button");
+    var captions = limiter.find('.caption-text');
 
     // Greensock variables
     var slider_value = 0;
@@ -44,26 +42,26 @@ require(['config'], function() {
       conductor: 1
     }
 
-    // Initial state - insulator text and band
+    // Find initial height
+    var linebound_height = linebounds.height();
 
-    TweenMax.set(div_band_mask, {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
+    // Initial state - insulator text and band
+    TweenMax.set(band_mask, {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
 
     // rescale when the window is resized
-
     $( window ).resize(function() {
 
-      linebound_height = $('.linebounds').height()
-      TweenMax.set('#band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
-      TweenMax.set(['#bluepath', '#blue_behind', '#band_label'], {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
-      TweenMax.set('#gap_label', {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
-      TweenMax.set('#gap_label', {opacity: gap_tween})
+      linebound_height = linebounds.height();
+      TweenMax.set(band_mask, {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
+      TweenMax.set([bluepath, blue_behind, band_label], {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
+      TweenMax.set(gap_label, {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
+      TweenMax.set(gap_label, {opacity: gap_tween})
 
     });
 
 
     // Button toggle
-
-    var buttons = $('button').on('click', function (e) {
+    buttons.on('click', function (e) {
 
         var $this = $(this),
             el = buttons.not(this),
@@ -73,9 +71,7 @@ require(['config'], function() {
         $this.addClass('selected');
         el.addClass('disabled');
 
-        var captions = $('.caption-text');
-
-        $('.caption-text').each(function() {
+        captions.each(function() {
           if (this.id == button_id + "-label") {
             $(this).css('opacity', '1');
           }
@@ -88,10 +84,10 @@ require(['config'], function() {
         band_tween = band_values[button_id.toString()]
         gap_tween = gap_values[button_id.toString()]
 
-        TweenMax.to('#band_mask', 1, {y: -(mask_tween) * (linebound_height), ease: Power1.easeInOut})
-        TweenMax.to(['#bluepath', '#blue_behind', '#band_label'], 1, {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
-        TweenMax.to('#gap_label', 1, {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
-        TweenMax.to('#gap_label', 1, {opacity: gap_tween})
+        TweenMax.to(band_mask, 1, {y: -(mask_tween) * (linebound_height), ease: Power1.easeInOut})
+        TweenMax.to([bluepath, blue_behind, band_label], 1, {y: band_tween * (linebound_height)/6, ease: Power1.easeInOut})
+        TweenMax.to(gap_label, 1, {y: band_tween * (linebound_height)/12, ease: Power1.easeInOut})
+        TweenMax.to(gap_label, 1, {opacity: gap_tween})
 
     });
 
