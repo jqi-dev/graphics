@@ -1,7 +1,23 @@
 require(['config'], function() {
   require(['jquery', 'greensock'], function() {
 
-    var linebound_height = $('.linebounds').height()
+    // Limit the scope of selectors so that there is no crosstalk in the Atlas
+    // environment.
+    var limiter = $(".graphics-environment").last().parent();
+    var base_scope = $('html');
+    if (limiter) {
+      // Use the following variable to scope down jQuery selectors
+      var base_scope = limiter;
+      console.log('inside bands ' + base_scope.attr('id'));
+    }
+
+    //var linebound_height = $('.linebounds').height();
+    var linebound_height = base_scope.find('.linebounds').height();
+    //console.log(linebound_height);
+    var div_band_mask = base_scope.find("#band_mask");
+
+
+    // Greensock variables
     var slider_value = 0;
     var mask_tween = 0.5;
     var band_tween = 0;
@@ -30,7 +46,7 @@ require(['config'], function() {
 
     // Initial state - insulator text and band
 
-    TweenMax.set('#band_mask', {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
+    TweenMax.set(div_band_mask, {y: -mask_tween * (linebound_height), ease: Power1.easeInOut})
 
     // rescale when the window is resized
 

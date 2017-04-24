@@ -13,6 +13,5 @@ requirejs.config({
 define(function(require) {
 
   var $ = require('jquery');
-  var tl = require('greensock');
 
 });
