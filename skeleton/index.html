@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--
+  The <head> should only have this <script> tag. If you need custom CSS,
+  either inline it below or put it in <style> tags inside the graphics
+  wrapper. The graphics asset will shed this <head> when it is embedded in the
+  Atlas, but it will have access to the Atlas js/config file.
+-->
+<script src="../require.js" data-main="js/config"></script>
+</head>
+
+<body>
+<!--
+  Every graphic must have an outer wrapper with an id of "graphics-environment."
+  This is what the Atlas code looks for when it loads a graphics asset.
+-->
+<div id="graphics-environment">
+
+<!--
+  Every graphic must have a UNIQUE ID, specified here and used in js/main.js.
+  The module code must self-scope down and only access elements inside this
+  container <div> so that they don't accidentally modify another graphic on an
+  Atlas entry.
+-->
+<div id="skeleton">
+
+<!--
+  Put your graphics HTML in here. You can include images with any relative path
+  you want, as long as they live under the /graphics/skeleton/ directory.
+-->
+
+<!--
+  You must include the following <script> tag so that the graphic will run
+  outside of the Atlas environment. The Atlas loader will actually strip this
+  tag away and execute main.js separately.
+-->
+<script>
+require(['main']);
+</script>
+
+</div>
+</div>
+</body>
+</html>
