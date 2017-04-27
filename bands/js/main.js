@@ -1,9 +1,15 @@
-require(['config'], function() {
-  require(['jquery', 'greensock'], function() {
+define(function(require) {
 
+  var $ = require('jquery');
+  require('greensock');
+
+  var band_structure = {};
+
+  band_structure.init = function() {
     // Limit the scope of selectors so that there is no crosstalk in the Atlas
     // environment.
     var limiter = $("#band-structure");
+    console.log(limiter);
 
     // set jQuery selectors for elements to manipulate
     var linebounds = limiter.find('.linebounds');
@@ -90,7 +96,8 @@ require(['config'], function() {
         TweenMax.to(gap_label, 1, {opacity: gap_tween})
 
     });
+  }
 
-  });
+  return band_structure;
 
 });

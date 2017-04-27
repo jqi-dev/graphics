@@ -165,13 +165,15 @@
     <p class="caption-text first" id="insulator-label">In an <b>insulator</b>, electrons fill up a band right to the brim. There is a gap—a region of energy that no electron in the material can inhabit—to the next band. Unless electrons receive a big kick, they cannot reach the higher band. This keeps them from conducting current, since a voltage applied across the material will not change electron behavior.</p>
     <p class="caption-text" id="conductor-label">In a <b>conductor</b>, electrons partially fill an energy band. This means there are slightly higher energies, available just out of reach, that electrons can jump to if they get a small kick. The voltage from a battery can provide that kick, causing the material to conduct.</p>
     <p class="caption-text" id="semiconductor-label">A <b>semiconductor</b> is a lot like an insulator, but the gap between bands is much smaller. It's possible for a voltage to bridge this gap, promoting some electrons to the higher band and causing a current to flow. But take that impetus away and the material acts like an insulator again. This switching behavior is what drives the digital transistors that form the backbone of our electronic gadgets.</p>
-    <p class="caption-text position" id="semimetal-label"><b>Semimetals</b> are unique in that they have bands that actually touch. Although electrons still only fill the lower band, mere thermal energy, from the temperature of the semimetal's surroundings, can give electrons the miniscule kick they need to reach the higher band. For Weyl semimetals, the bands around the touching point have a certain shape that makes excitations of electrons behave like Weyl fermions.
+    <p class="caption-text position" id="semimetal-label"><b>Semimetals</b> are unique in that they have bands that actually touch. Although electrons still only fill the lower band, mere thermal energy, from the temperature of the semimetal's surroundings, can give electrons the miniscule kick they need to reach the higher band. For Weyl semimetals, the bands around the touching point have a certain shape that makes excitations of electrons behave like Weyl fermions.</p>
   </div>
 </div>
 
 
 <script>
-require(['main']);
+require(['main'], function(band_structure){
+  band_structure.init();
+});
 </script>
 </div>
 </div>

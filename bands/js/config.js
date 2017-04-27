@@ -9,9 +9,3 @@ requirejs.config({
     greensock: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min'
   }
 });
-
-define(function(require) {
-
-  var $ = require('jquery');
-
-});
