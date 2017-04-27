@@ -9,11 +9,3 @@ requirejs.config({
     jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min'
   }
 });
-
-// Define registers the asset with RequireJS so that you can use it in other
-// definitions. In particular, we require it in the asset's own main.js file.
-define(function(require) {
-
-  var $ = require('jquery');
-
-});

@@ -1,5 +1,11 @@
-require(['config'], function() {
-  require(['jquery', 'greensock'], function($){
+define(function(require) {
+
+  var $ = require('jquery');
+  require('greensock');
+
+  var testAnimation = {};
+
+  testAnimation.init = function() {
 
     // Limit the scope of selectors so that there is no crosstalk in the Atlas
     // environment.
@@ -17,6 +23,10 @@ require(['config'], function() {
     pause_button.on('click', function(event) {
       tl.paused(!tl.paused());
       this.innerHTML = tl.paused() ? "play" : "pause";
+
     });
-  });
+  }  
+
+  return testAnimation;
+
 });

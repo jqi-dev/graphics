@@ -36,7 +36,10 @@
   tag away and execute main.js separately.
 -->
 <script>
-require(['main']);
+require(['main'], function(skeleton) {
+  // Each module's main.js must export an object with a function named init().
+  skeleton.init();
+});
 </script>
 
 </div>

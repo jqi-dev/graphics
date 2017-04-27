@@ -9,7 +9,7 @@ define(function(require) {
     // Limit the scope of selectors so that there is no crosstalk in the Atlas
     // environment.
     var limiter = $("#band-structure");
-    console.log(limiter);
+    //console.log(limiter);
 
     // set jQuery selectors for elements to manipulate
     var linebounds = limiter.find('.linebounds');

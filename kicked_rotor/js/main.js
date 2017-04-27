@@ -1,12 +1,13 @@
-require(['config'], function() {
-  require(['jquery'], function($){
-    // This is a simple graphic, so nothing to really do.
-    // Still, we need jQuery for consistency with other graphics.
+define(function(require) {
 
-    // Limit the scope of selectors so that there is no crosstalk in the Atlas
-    // environment.
+  var $ = require('jquery');
+
+  var kickedRotor = {};
+
+  kickedRotor.init = function() {
     var limiter = $("#kicked-rotor");
+  }
 
+  return kickedRotor;
 
-  });
 });

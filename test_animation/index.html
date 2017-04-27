@@ -14,7 +14,9 @@
 <button id="pause" style="display:block;margin:0 auto;background-color:#eaeaea;">pause</button>
 
 <script>
-require(['main']);
+require(['main'], function(testAnimation){
+  testAnimation.init();
+});
 </script>
 </div>
 </div>
